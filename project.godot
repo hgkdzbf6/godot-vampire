@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Vampire Sword Survivor"
+config/name="VampireSurvivor"
 config/description="吸血鬼幸存者风格 Roguelite：自动环绕飞剑、走位、升级、Boss 战"
 run/main_scene="res://src/main/Main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
@@ -28,6 +28,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation="landscape"
 
 [rendering]
 

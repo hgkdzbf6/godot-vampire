@@ -68,6 +68,10 @@ func unlock_skill(skill: String, charges: int) -> void:
 	_charges[skill] += charges
 
 
+func cast_skill(skill: String) -> void:
+	_cast(skill)
+
+
 func _cast(skill: String) -> void:
 	if not _unlocked.get(skill, false):
 		return

@@ -16,6 +16,9 @@ extends CanvasLayer
 
 
 var _kills := 0
+var _hp_bar_style: StyleBoxFlat
+var _hp_bar_style_yellow: StyleBoxFlat
+var _hp_bar_style_red: StyleBoxFlat
 
 
 func _ready() -> void:
@@ -31,12 +34,31 @@ func _ready() -> void:
 	GameEvents.hud_message.connect(_on_message)
 	_boss_bar.visible = false
 	_boss_label.visible = false
+	# 初始化 HP 血条颜色样式
+	_hp_bar_style = StyleBoxFlat.new()
+	_hp_bar_style.bg_color = Color(0.2, 0.8, 0.2)  # 绿色
+	_hp_bar_style.set_corner_radius_all(3)
+	_hp_bar.add_theme_stylebox_override("fill", _hp_bar_style)
+	_hp_bar_style_yellow = StyleBoxFlat.new()
+	_hp_bar_style_yellow.bg_color = Color(0.9, 0.8, 0.2)  # 黄色
+	_hp_bar_style_yellow.set_corner_radius_all(3)
+	_hp_bar_style_red = StyleBoxFlat.new()
+	_hp_bar_style_red.bg_color = Color(0.9, 0.2, 0.2)  # 红色
+	_hp_bar_style_red.set_corner_radius_all(3)
 
 
 func _on_hp_changed(cur: float, mx: float) -> void:
 	_hp_bar.max_value = mx
 	_hp_bar.value = cur
 	_hp_label.text = "HP %d / %d" % [int(cur), int(mx)]
+	# 根据血量百分比改变颜色
+	var ratio := cur / mx
+	if ratio > 0.5:
+		_hp_bar.add_theme_stylebox_override("fill", _hp_bar_style)
+	elif ratio > 0.1:
+		_hp_bar.add_theme_stylebox_override("fill", _hp_bar_style_yellow)
+	else:
+		_hp_bar.add_theme_stylebox_override("fill", _hp_bar_style_red)
 
 
 func _on_xp_changed(xp: int, xp_next: int) -> void:
@@ -95,3 +117,11 @@ func _on_message(text: String, duration: float) -> void:
 	_message_tween = create_tween()
 	_message_tween.tween_interval(duration * 0.6)
 	_message_tween.tween_property(_message_label, "modulate:a", 0.0, duration * 0.4)
+
+
+## 重置 HUD 状态（新游戏开始时调用）
+func reset() -> void:
+	_boss_bar.visible = false
+	_boss_label.visible = false
+	_boss_bar.modulate.a = 1.0
+	_message_label.modulate.a = 0.0

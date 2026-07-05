@@ -381,7 +381,6 @@ func _spawn_warning_text(text: String) -> void:
 	get_parent().add_child(dn)
 	dn.global_position = global_position + Vector2(0, -body_radius - 30)
 	dn.setup(text, Color("ff6a6a"), true)
-	GameEvents.hud_message.emit(text, 1.0)
 
 
 func _draw() -> void:

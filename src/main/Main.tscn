@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://src/ui/LeaderboardView.tscn" id="8_lv"]
 [ext_resource type="PackedScene" path="res://src/ui/Bestiary.tscn" id="9_be"]
 [ext_resource type="PackedScene" path="res://src/ui/PauseMenu.tscn" id="10_pm"]
+[ext_resource type="Script" path="res://src/ui/TouchInput.gd" id="11_touch"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
@@ -65,3 +66,6 @@ visible = false
 visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_pm")]
+
+[node name="TouchInput" type="CanvasLayer" parent="."]
+script = ExtResource("11_touch")

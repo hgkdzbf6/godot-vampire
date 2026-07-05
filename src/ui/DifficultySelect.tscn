@@ -116,7 +116,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
 theme_override_colors/font_color = Color(0.85, 0.78, 1, 1)
 theme_override_font_sizes/font_size = 22
-toggle_mode = true
 text = "⚙ 自定义"
 
 [node name="LeaderboardButton" type="Button" parent="VBox/Buttons"]
@@ -135,255 +134,364 @@ theme_override_colors/font_color = Color(0.8, 0.9, 0.7, 1)
 theme_override_font_sizes/font_size = 22
 text = "📖 图鉴"
 
-[node name="CustomPanel" type="Control" parent="VBox"]
+[node name="CustomOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
-custom_minimum_size = Vector2(0, 280)
-mouse_filter = 1
-
-[node name="BG2" type="ColorRect" parent="VBox/CustomPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1, 0.12, 0.18, 0.85)
+color = Color(0, 0, 0, 0.7)
+mouse_filter = 0
 
-[node name="Grid" type="GridContainer" parent="VBox/CustomPanel"]
+[node name="CustomPanel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CustomPanelBG" type="PanelContainer" parent="CustomPanel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -460.0
-offset_top = -130.0
-offset_right = 460.0
-offset_bottom = 110.0
+offset_left = -420.0
+offset_top = -280.0
+offset_right = 420.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="CustomPanel/CustomPanelBG"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 28
+text = "自定义难度"
+
+[node name="CloseBtn" type="Button" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(40, 40)
+theme_override_font_sizes/font_size = 20
+text = "✕"
+
+[node name="Separator" type="HSeparator" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="SlidersGrid" type="GridContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 12
-columns = 3
 
-[node name="L_p_dmg" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="Col1" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 4
+
+[node name="Row1" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_p_dmg" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row1"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "剑伤害 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_p_dmg" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_p_dmg" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer1" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_p_hp" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_p_dmg" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row1"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "玩家剑的伤害倍率"
+
+[node name="Row2" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_p_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "最大生命 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_p_hp" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_p_hp" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row2"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer2" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_xp" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_p_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "玩家最大生命值倍率"
+
+[node name="Row3" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_xp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "经验获取 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_xp" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_xp" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row3"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer3" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_e_hp" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_xp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row3"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "击杀获得经验值倍率"
+
+[node name="Row4" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_e_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "怪物血量 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_e_hp" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_e_hp" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row4"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer4" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_e_dmg" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_e_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row4"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "普通敌人生命值倍率"
+
+[node name="Row5" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_e_dmg" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "怪物伤害 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_e_dmg" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_e_dmg" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row5"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer5" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_e_spd" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_e_dmg" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col1/Row5"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "敌人攻击伤害倍率"
+
+[node name="Col2" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 4
+
+[node name="Row1" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_e_spd" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "怪物速度 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_e_spd" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_e_spd" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer6" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_spawn" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_e_spd" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row1"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "敌人移动速度倍率"
+
+[node name="Row2" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_spawn" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "刷怪频率 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_spawn" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_spawn" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row2"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 2.5
 step = 0.05
 value = 1.0
 
-[node name="Spacer7" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_b_hp" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_spawn" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "敌人刷新频率倍率"
+
+[node name="Row3" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_b_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "Boss血量 ×1.00"
-horizontal_alignment = 1
 
-[node name="S_b_hp" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_b_hp" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row3"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.3
 max_value = 3.0
 step = 0.05
 value = 1.0
 
-[node name="Spacer8" type="Control" parent="VBox/CustomPanel/Grid"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="L_b_early" type="Label" parent="VBox/CustomPanel/Grid"]
+[node name="D_b_hp" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row3"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Boss生命值倍率"
+
+[node name="Row4" type="VBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="L_b_early" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "Boss提前 0 秒"
-horizontal_alignment = 1
 
-[node name="S_b_early" type="HSlider" parent="VBox/CustomPanel/Grid"]
+[node name="S_b_early" type="HSlider" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row4"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(180, 0)
+size_flags_horizontal = 3
 min_value = 0.0
 max_value = 120.0
 step = 5.0
 value = 0.0
 
-[node name="Spacer9" type="Control" parent="VBox/CustomPanel/Grid"]
+[node name="D_b_early" type="Label" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/SlidersGrid/Col2/Row4"]
+unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Boss提前登场秒数"
 
-[node name="CustomBtns" type="HBoxContainer" parent="VBox/CustomPanel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -70.0
-offset_right = 200.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 16
+[node name="Buttons" type="HBoxContainer" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="CustomStart" type="Button" parent="VBox/CustomPanel/CustomBtns"]
+[node name="CustomStart" type="Button" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(220, 56)
 theme_override_colors/font_color = Color(1, 0.95, 0.6, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 24
 text = "▶ 开始自定义局"
 
-[node name="CustomBack" type="Button" parent="VBox/CustomPanel/CustomBtns"]
+[node name="CustomBack" type="Button" parent="CustomPanel/CustomPanelBG/MarginContainer/VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(160, 56)
 theme_override_colors/font_color = Color(0.7, 0.74, 0.82, 1)
 theme_override_font_sizes/font_size = 20
 text = "返回"

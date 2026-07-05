@@ -22,6 +22,7 @@ enum State { MENU, STAGE_TRANSITION, PLAYING, PAUSED, GAME_OVER }
 @onready var _pause_menu: Control = $PauseMenu
 @onready var _bg: ColorRect = $Background
 @onready var _stage_label: Label = $StageLabel
+@onready var _touch_input: TouchInput = $TouchInput
 
 const ENEMY_SCENE := preload("res://src/entities/Enemy.tscn")
 const BOSS_SCENE := preload("res://src/entities/Boss.tscn")
@@ -234,6 +235,8 @@ func _start_new_run() -> void:
 	_stage_index = 0
 	_kills = 0   # 新一局击杀数清零
 	_upgrade_taken.clear()
+	# 重置 HUD 状态（隐藏 Boss 血条等）
+	_hud.reset()
 	_enter_stage(0)
 
 
