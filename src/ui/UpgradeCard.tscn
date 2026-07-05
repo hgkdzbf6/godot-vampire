@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://card000000001"]
+
+[ext_resource type="Script" path="res://src/ui/UpgradeCard.gd" id="1_card"]
+
+[node name="UpgradeCard" type="Control"]
+custom_minimum_size = Vector2(320, 480)
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 480.0
+mouse_filter = 1
+script = ExtResource("1_card")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

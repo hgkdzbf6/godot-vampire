@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://sword00000001"]
+
+[ext_resource type="Script" path="res://src/entities/Sword.gd" id="1_sword"]
+
+[sub_resource type="CapsuleShape2D" id="Capsule_sword"]
+radius = 11.0
+height = 44.0
+
+[node name="Sword" type="Area2D"]
+collision_layer = 0
+collision_mask = 10
+script = ExtResource("1_sword")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("Capsule_sword")

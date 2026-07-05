@@ -1,0 +1,4 @@
+SIL Open Font License 1.1
+Noto Sans CJK SC (https://fonts.google.com/noto)
+Copyright 2014-2024 Adobe (http://www.adobe.com/), with Reserved Font Name "Source".
+本字体按 SIL Open Font License 1.1 授权，可自由使用、修改、分发。

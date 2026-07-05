@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://enemy00000001"]
+
+[ext_resource type="Script" path="res://src/entities/Enemy.gd" id="1_enemy"]
+
+[sub_resource type="CircleShape2D" id="Circle_body"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="Circle_hit"]
+radius = 16.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Circle_body")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="Shape" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("Circle_hit")

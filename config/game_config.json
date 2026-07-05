@@ -1,0 +1,303 @@
+{
+	"comment": "Vampire Sword Survivor —— 游戏参数集中配置。改这里即可调平衡，无需动代码。",
+
+	"monster_grades": {
+		"comment": "5 档怪物等级，base 值为普通(★★)基准，其他档按倍率缩放",
+		"grades": [
+			{ "id": 0, "name": "低等",  "stars": 1, "hp_mult": 0.6, "dmg_mult": 0.6, "speed_mult": 0.9, "visual_mult": 0.8 },
+			{ "id": 1, "name": "普通",  "stars": 2, "hp_mult": 1.0, "dmg_mult": 1.0, "speed_mult": 1.0, "visual_mult": 1.0 },
+			{ "id": 2, "name": "精英",  "stars": 3, "hp_mult": 1.8, "dmg_mult": 1.4, "speed_mult": 1.1, "visual_mult": 1.3 },
+			{ "id": 3, "name": "凶残",  "stars": 4, "hp_mult": 3.0, "dmg_mult": 1.9, "speed_mult": 1.2, "visual_mult": 1.6 },
+			{ "id": 4, "name": "恶魔",  "stars": 5, "hp_mult": 5.0, "dmg_mult": 2.6, "speed_mult": 1.35, "visual_mult": 2.0 }
+		]
+	},
+
+	"bestiary_bosses": [
+		{
+			"name": "深渊守门人",
+			"stage": 1,
+			"color": "#7a1f8f",
+			"max_hp": 4200.0,
+			"contact_damage": 24.0,
+			"skills": ["冲锋", "扇形斩", "弹幕"],
+			"desc": "第一关 Boss。守护荒芜原野的腐化骑士，擅长冲锋与扇形斩击。"
+		},
+		{
+			"name": "瘟疫哀魂",
+			"stage": 2,
+			"color": "#3c8f6a",
+			"max_hp": 6800.0,
+			"contact_damage": 32.0,
+			"skills": ["冲锋", "扇形斩", "地面范围攻击", "弹幕", "召唤小怪"],
+			"desc": "第二关 Boss。墓园深处的剧毒哀魂，技能更密集，会召唤亡灵助战。"
+		},
+		{
+			"name": "深渊领主",
+			"stage": 3,
+			"color": "#8f1f3a",
+			"max_hp": 11000.0,
+			"contact_damage": 42.0,
+			"skills": ["冲锋", "扇形斩", "地面范围攻击", "弹幕", "召唤小怪", "激光扫射"],
+			"desc": "最终关 Boss。深渊王座的统治者，掌握全部六种技能，激光扫射覆盖全场。"
+		}
+	],
+
+	"player": {
+		"base_move_speed": 230.0,
+		"base_max_hp": 100.0,
+		"hit_invul_time": 1.0,
+		"pickup_range": 70.0
+	},
+	"sword": {
+		"base_count": 3,
+		"base_radius": 56.0,
+		"base_rot_speed": 2.8,
+		"base_size": 1.0,
+		"base_damage": 16.0,
+		"base_pierce": 0,
+		"hit_cooldown": 0.4,
+		"length": 30.0,
+		"width": 11.0,
+		"hit_capsule_radius": 11.0,
+		"hit_capsule_height": 44.0,
+		"base_knockback": 90.0
+	},
+	"enemy": {
+		"hp_scale_per_second": 0.012,
+		"contact_interval": 0.6,
+		"max_count": 100,
+		"cull_check_interval": 1.0,
+		"cull_radius": 900.0,
+		"comment": "max_count: 屏幕上怪物上限；超出时清除离玩家最远的"
+	},
+	"enemy_types": [
+		{ "name": "僵尸", "shape": "square", "movement": "chase", "max_hp": 14.0, "speed": 70.0, "dmg": 8.0, "xp": 1, "color": "#9b3b3b", "weight": 5.0, "elite": false, "min_time": 0 },
+		{ "name": "骷髅", "shape": "triangle", "movement": "chase", "max_hp": 10.0, "speed": 120.0, "dmg": 6.0, "xp": 1, "color": "#3b9b6a", "weight": 4.0, "elite": false, "min_time": 0 },
+		{ "name": "蝙蝠", "shape": "diamond", "movement": "wander", "max_hp": 22.0, "speed": 95.0, "dmg": 12.0, "xp": 2, "color": "#6a3bb0", "weight": 3.5, "elite": false, "min_time": 30 },
+		{ "name": "幽魂", "shape": "ghost", "movement": "wander", "max_hp": 38.0, "speed": 130.0, "dmg": 14.0, "xp": 3, "color": "#b03b6a", "weight": 3.0, "elite": false, "min_time": 60 },
+		{ "name": "冲撞兽", "shape": "diamond", "movement": "charge", "max_hp": 30.0, "speed": 200.0, "dmg": 16.0, "xp": 3, "color": "#e07a3c", "weight": 2.0, "elite": false, "min_time": 45 },
+		{ "name": "精英守卫", "shape": "star", "movement": "chase", "max_hp": 110.0, "speed": 60.0, "dmg": 22.0, "xp": 8, "color": "#d6a6ff", "weight": 0.8, "elite": true, "min_time": 120 }
+	],
+
+	"stages": [
+		{
+			"name": "荒芜原野",
+			"subtitle": "第一关",
+			"bg_color": "#10141f",
+			"duration": 90.0,
+			"boss_time_offset": 0.0,
+			"enemy_hp_mult": 1.0,
+			"enemy_damage_mult": 1.0,
+			"spawn_mult": 1.0,
+			"boss_hp_mult": 1.0,
+			"enemy_pool_min_time": 0,
+			"enemy_visual_scale": 1.0,
+			"camera_zoom": 1.3
+		},
+		{
+			"name": "诅咒墓园",
+			"subtitle": "第二关",
+			"bg_color": "#15101c",
+			"duration": 120.0,
+			"boss_time_offset": 0.0,
+			"enemy_hp_mult": 1.35,
+			"enemy_damage_mult": 1.25,
+			"spawn_mult": 1.2,
+			"boss_hp_mult": 1.3,
+			"enemy_pool_min_time": 30,
+			"enemy_visual_scale": 1.5,
+			"camera_zoom": 0.95
+		},
+		{
+			"name": "深渊王座",
+			"subtitle": "最终关",
+			"bg_color": "#1c1014",
+			"duration": 150.0,
+			"boss_time_offset": 0.0,
+			"enemy_hp_mult": 1.8,
+			"enemy_damage_mult": 1.55,
+			"spawn_mult": 1.45,
+			"boss_hp_mult": 1.7,
+			"enemy_pool_min_time": 60,
+			"enemy_visual_scale": 2.0,
+			"camera_zoom": 0.75
+		}
+	],
+	"boss": {
+		"spawn_time": 180.0,
+		"max_hp": 4200.0,
+		"move_speed": 110.0,
+		"contact_damage": 24.0,
+		"body_radius": 36.0
+	},
+	"spawn": {
+		"interval_start": 1.4,
+		"interval_min": 0.32,
+		"interval_decay": 0.985,
+		"radius": 540.0,
+		"wave_count_base": 1,
+		"wave_count_time_divisor": 25.0,
+		"wave_count_max": 5
+	},
+	"xp": {
+		"kill_xp_base": 1,
+		"gem_value_big": 5,
+		"gem_radius": 6.0,
+		"first_level": 5,
+		"growth_step": 3,
+		"growth_quad": 0.15,
+		"comment": "平滑升级曲线：xp(lv)=first_level + growth_step*(lv-1) + growth_quad*(lv-1)^2。前期线性小步长频繁升级，后期增速平缓避免过度打断。"
+	},
+	"pickup_buff": {
+		"comment": "地图上随机刷新、走过去就能吃的 Buff 道具",
+		"spawn_interval": 9.0,
+		"spawn_interval_jitter": 4.0,
+		"spawn_radius_min": 120.0,
+		"spawn_radius_max": 360.0,
+		"collect_radius": 26.0,
+		"types": [
+			{
+				"id": "heal",
+				"name": "治疗药水",
+				"color": "#ff5a7a",
+				"weight": 3.0,
+				"icon": "cross",
+				"duration": 0.0
+			},
+			{
+				"id": "speed",
+				"name": "疾风靴",
+				"color": "#7be0ff",
+				"weight": 2.0,
+				"icon": "arrow",
+				"duration": 8.0
+			},
+			{
+				"id": "damage",
+				"name": "力量符文",
+				"color": "#ff8a3c",
+				"weight": 2.0,
+				"icon": "sword",
+				"duration": 10.0
+			},
+			{
+				"id": "rot_speed",
+				"name": "迅捷之刃",
+				"color": "#ffd24a",
+				"weight": 2.0,
+				"icon": "spin",
+				"duration": 10.0
+			},
+			{
+				"id": "magnet",
+				"name": "磁铁",
+				"color": "#c8a6ff",
+				"weight": 2.5,
+				"icon": "magnet",
+				"duration": 6.0
+			},
+			{
+				"id": "shield",
+				"name": "护盾",
+				"color": "#8fffae",
+				"weight": 1.5,
+				"icon": "shield",
+				"duration": 6.0
+			},
+			{
+				"id": "xp_burst",
+				"name": "经验宝石",
+				"color": "#8fffae",
+				"weight": 2.5,
+				"icon": "gem",
+				"duration": 0.0
+			},
+			{
+				"id": "sword_add",
+				"name": "剑灵核",
+				"color": "#ffd24a",
+				"weight": 0.8,
+				"icon": "sword",
+				"duration": 0.0,
+				"comment": "永久增加一把剑（稀有）"
+			},
+			{
+				"id": "element_fire",
+				"name": "火焰晶石",
+				"color": "#ff7a3c",
+				"weight": 1.2,
+				"icon": "fire",
+				"duration": 0.0,
+				"comment": "剑附加火焰附魔"
+			},
+			{
+				"id": "element_frost",
+				"name": "冰霜晶石",
+				"color": "#6cc7ff",
+				"weight": 1.2,
+				"icon": "frost",
+				"duration": 0.0,
+				"comment": "剑附加冰冻附魔"
+			},
+			{
+				"id": "element_lightning",
+				"name": "雷电晶石",
+				"color": "#ffe34a",
+				"weight": 1.2,
+				"icon": "lightning",
+				"duration": 0.0,
+				"comment": "剑附加雷电附魔"
+			},
+			{
+				"id": "instant_level",
+				"name": "升阶卷轴",
+				"color": "#c8a6ff",
+				"weight": 0.6,
+				"icon": "star",
+				"duration": 0.0,
+				"comment": "直接完整升级一级"
+			},
+			{
+				"id": "unlock_sword",
+				"name": "巨剑核",
+				"color": "#ffd24a",
+				"weight": 1.0,
+				"icon": "sword",
+				"duration": 0.0,
+				"comment": "解锁巨剑冲撞 +3 次"
+			},
+			{
+				"id": "unlock_laser",
+				"name": "激光核",
+				"color": "#7be0ff",
+				"weight": 1.0,
+				"icon": "lightning",
+				"duration": 0.0,
+				"comment": "解锁毁灭激光 +3 次"
+			},
+			{
+				"id": "unlock_timestop",
+				"name": "时停核",
+				"color": "#c8a6ff",
+				"weight": 0.8,
+				"icon": "shield",
+				"duration": 0.0,
+				"comment": "解锁时停力场 +2 次"
+			}
+		],
+		"effect": {
+			"heal_amount": 35.0,
+			"speed_mult": 1.5,
+			"damage_mult": 1.6,
+			"rot_speed_mult": 1.6,
+			"magnet_range_bonus": 320.0,
+			"shield_damage_reduction": 0.5,
+			"xp_burst_amount": 8,
+			"skill_charges_per_pickup": 3,
+			"skill_charges_timestop": 2
+		}
+	},
+	"upgrade": {
+		"choice_count": 3
+	}
+}

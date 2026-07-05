@@ -1,0 +1,16 @@
+# Godot 编辑器缓存与导入缓存（可由源文件重新生成）
+.godot/
+*.import
+
+# 导出产物
+export/
+/build/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时测试脚本（下划线前缀的是开发期临时文件）
+src/main/_*.gd
+src/main/_*.tscn
+src/main/_*.uid
