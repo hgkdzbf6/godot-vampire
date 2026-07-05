@@ -37,6 +37,9 @@ func set_kills(n: int) -> void:
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	_toggle_btn.pressed.connect(toggle_visible)
 	_content.visible = true
 	# 注册 i 键切换（如果输入动作不存在则跳过）

@@ -63,13 +63,14 @@ func _process(delta: float) -> void:
 	if _press_anim > 0:
 		_press_anim = max(0.0, _press_anim - delta * 4.0)
 
-	# 组合缩放：入场弹性 × 悬停(放大6%) × 点击(先放大再缩)
+	# 组合缩放：入场弹性 × 悬停(放大6%) × 点击(先放大再缩) × UI缩放
 	var s := _ease_out_back(_entry_progress)
 	if _hover_progress > 0.01:
 		s *= 1.0 + 0.06 * _hover_progress
 	if _press_anim > 0:
 		# 点击瞬间放大到 1.12 再回落
 		s *= 1.0 + 0.12 * _press_anim
+	s *= UIScale.scale   # 小屏整体放大卡片（含字号/图标）
 	scale = Vector2(s, s)
 
 	queue_redraw()

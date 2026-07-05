@@ -41,6 +41,9 @@ var _has_custom_changes := false
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	# 连接预设按钮
 	for i in PRESETS.size():
 		var btn: Button = _preset_buttons.get_child(i)
@@ -174,7 +177,8 @@ func _close_custom_panel() -> void:
 
 
 func _on_overlay_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
+	# 鼠标点击 或 触屏按下 都关闭自定义面板
+	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
 		_close_custom_panel()
 
 

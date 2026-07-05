@@ -11,6 +11,9 @@ signal back_requested()
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	%BackButton.pressed.connect(func(): back_requested.emit())
 	_populate()

@@ -23,9 +23,10 @@ func setup(text: String, color: Color, crit: bool = false) -> void:
 func _ready() -> void:
 	_label.text = _text
 	_label.add_theme_color_override("font_color", _color)
-	_label.add_theme_font_size_override("font_size", 24 if _crit else _font_size)
+	# Node2D 下的 Label 不受 content_scale_factor 影响，手动应用 UIScale
+	_label.add_theme_font_size_override("font_size", UIScale.font(24 if _crit else _font_size))
 	if _crit:
-		_label.add_theme_font_size_override("font_size", 28)
+		_label.add_theme_font_size_override("font_size", UIScale.font(28))
 		_label.modulate = Color(1.6, 1.6, 1.6)
 	_label.z_index = 100
 	_label.pivot_offset = _label.size * 0.5

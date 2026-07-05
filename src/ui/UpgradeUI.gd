@@ -19,6 +19,9 @@ var _cards: Array[UpgradeCard] = []
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	# 关键：暂停期间本界面必须继续响应输入，否则玩家无法选牌
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide_panel()

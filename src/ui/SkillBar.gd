@@ -16,7 +16,14 @@ var _totals: Dictionary = {"sword": 6.0, "laser": 5.0, "timestop": 8.0}
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	GameEvents.skill_state_changed.connect(_on_state_changed)
+	# 触屏设备由 TouchInput 提供更大的技能按钮，桌面端才显示底部 SkillBar
+	if UIScale.is_touchscreen:
+		visible = false
+		set_process(false)
 
 
 func _on_state_changed(skill_id: String, unlocked: bool, charges: int, cd_remaining: float, cd_total: float) -> void:

@@ -13,6 +13,9 @@ var _result_data: Dictionary = {}
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	# 结算面板在游戏流程中始终可交互（即使树被暂停）
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide_panel()
@@ -35,6 +38,13 @@ func _ready() -> void:
 	)
 	# 名称输入：回车提交
 	%NameEdit.text_submitted.connect(func(_s): _on_submit())
+	# 移动端软键盘：获焦时显式唤起，失焦时隐藏
+	%NameEdit.focus_entered.connect(func():
+		DisplayServer.virtual_keyboard_show(%NameEdit.text)
+	)
+	%NameEdit.focus_exited.connect(func():
+		DisplayServer.virtual_keyboard_hide()
+	)
 
 
 func show_defeat(time: float, kills: int, level: int) -> void:

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+UIScale="*res://src/autoload/UIScale.gd"
 GameEvents="*res://src/autoload/GameEvents.gd"
 Difficulty="*res://src/data/Difficulty.gd"
 Leaderboard="*res://src/data/Leaderboard.gd"

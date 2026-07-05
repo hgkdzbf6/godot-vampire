@@ -28,6 +28,9 @@ func _ready() -> void:
 	GameEvents.player_leveled_up.connect(_on_leveled_up)
 	GameEvents.hud_timer_changed.connect(_on_timer)
 	GameEvents.hud_kills_changed.connect(_on_kills)
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	GameEvents.boss_spawned.connect(_on_boss_spawned)
 	GameEvents.boss_health_changed.connect(_on_boss_hp)
 	GameEvents.boss_defeated.connect(_on_boss_defeated)

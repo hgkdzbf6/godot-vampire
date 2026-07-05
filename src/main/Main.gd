@@ -69,6 +69,8 @@ func _ready() -> void:
 	_pause_menu.back_to_menu_requested.connect(_on_back_to_menu)
 	_pause_menu.visible = false
 	_stage_label.visible = false
+	# StageLabel 在 Node2D 下，不受 UIScale 自动缩放，手动应用
+	_stage_label.add_theme_font_size_override("font_size", UIScale.font(48))
 	# 全屏菜单 UI 必须挂在 CanvasLayer 下，否则作为 Node2D 子节点时 Control 的
 	# anchor 布局不生效（size 为 0，看不到内容）。运行时创建 CanvasLayer 并 reparent。
 	var menu_canvas := CanvasLayer.new()
@@ -144,6 +146,7 @@ func _enter_menu() -> void:
 	_pause_menu.visible = false
 	_hud.visible = false
 	_stage_label.visible = false
+	_touch_input.visible = false   # 菜单状态隐藏触摸操作
 	# 取消暂停（从暂停菜单返回时）
 	get_tree().paused = false
 	# 恢复相机缩放
@@ -298,6 +301,9 @@ func _begin_play_after_transition() -> void:
 	get_tree().paused = false
 	GameEvents.hud_kills_changed.emit(_kills)
 	GameEvents.hud_message.emit("第 %d 关 · %s" % [_stage_index + 1, _stage_cfg.get("name", "")], 2.0)
+	# 通知触摸 UI 游戏正式开始（TouchInput 据此显示摇杆/技能按钮）
+	GameEvents.game_started.emit()
+	_touch_input.visible = true
 
 
 func _show_stage_transition() -> void:
@@ -348,6 +354,7 @@ func _after_boss_defeated() -> void:
 func _show_victory() -> void:
 	_state = State.GAME_OVER
 	_set_gameplay_active(false)
+	_touch_input.visible = false   # 结算时隐藏触摸操作
 	# 胜利记录用总时间
 	_gameover_panel.show_victory(_total_time, _kills, _player.level)
 
@@ -553,5 +560,6 @@ func _on_player_died() -> void:
 func _on_game_over() -> void:
 	_state = State.GAME_OVER
 	_set_gameplay_active(false)
+	_touch_input.visible = false   # 结算时隐藏触摸操作
 	# 失败记录用总时间
 	_gameover_panel.show_defeat(_total_time, _kills, _player.level)

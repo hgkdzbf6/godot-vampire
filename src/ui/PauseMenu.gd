@@ -11,6 +11,9 @@ signal back_to_menu_requested()
 
 
 func _ready() -> void:
+	# 应用 UI 缩放（递归缩放所有子控件的字号）
+	UIScale.apply_font_scale(self)
+	UIScale.scale_changed.connect(func(_s): UIScale.apply_font_scale(self))
 	# 暂停时本菜单仍要响应
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	%ResumeButton.pressed.connect(func(): resume_requested.emit())
