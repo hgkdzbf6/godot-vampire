@@ -55,6 +55,9 @@ func _ready() -> void:
 	GameEvents.boss_defeated.connect(_on_boss_defeated)
 	GameEvents.player_died.connect(_on_player_died)
 	GameEvents.game_over.connect(_on_game_over)
+	# 升级时隐藏触摸UI（避免遮挡升级卡片点击），选完恢复
+	GameEvents.level_up_opened.connect(func(_c): if _state == State.PLAYING: _touch_input.visible = false)
+	GameEvents.upgrade_applied.connect(func(_u): if _state == State.PLAYING: _touch_input.visible = true)
 	_diff_select.start_requested.connect(_on_start_game)
 	_diff_select.leaderboard_requested.connect(_show_leaderboard_from_menu)
 	_diff_select.bestiary_requested.connect(_show_bestiary_from_menu)
@@ -186,6 +189,7 @@ func _enter_pause() -> void:
 	_state_before_pause = _state
 	_state = State.PAUSED
 	get_tree().paused = true
+	_touch_input.visible = false   # 暂停时隐藏触摸操作，避免遮挡暂停菜单
 	_pause_menu.open()
 
 
@@ -193,6 +197,9 @@ func _exit_pause() -> void:
 	_pause_menu.close()
 	get_tree().paused = false
 	_state = _state_before_pause
+	# 恢复游戏时重新显示触摸操作
+	if _state == State.PLAYING:
+		_touch_input.visible = true
 
 
 func _on_pause_resume() -> void:
